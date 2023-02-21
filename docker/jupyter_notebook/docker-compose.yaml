@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+  jupyter:
+    image: jupyter/minimal-notebook
+    hostname: jupyter
+    container_name: jupyter
+    volumes:
+      - "./data/:/home/jovyan/work"
+    ports:
+      - "8888:8888"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - count: 1
+              capabilities: [ gpu ]
